@@ -14,6 +14,7 @@ export class MsgCore implements INodeType {
     },
     inputs: ['main'],
     outputs: ['main'],
+    usableAsTool: true,
     credentials: [
       {
         name: 'MsgCoreApi',
