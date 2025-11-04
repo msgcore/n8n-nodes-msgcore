@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-msgcore",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "n8n community node for MsgCore universal messaging gateway",
   "keywords": [
     "n8n-community-node-package",

@@ -35,8 +35,14 @@ export class MsgCore implements INodeType {
       type: 'options',
       noDataExpression: true,
       options: [
+        { name: 'Analysis / Entities', value: 'analysis / entities' },
+        { name: 'Analysis / Models', value: 'analysis / models' },
+        { name: 'Analysis / Profiles', value: 'analysis / profiles' },
+        { name: 'Analysis / Runs', value: 'analysis / runs' },
+        { name: 'Analysis / Schemas', value: 'analysis / schemas' },
         { name: 'ApiKeys', value: 'apikeys' },
         { name: 'Auth', value: 'auth' },
+        { name: 'Chats', value: 'chats' },
         { name: 'Identities', value: 'identities' },
         { name: 'Members', value: 'members' },
         { name: 'Messages', value: 'messages' },
@@ -45,8 +51,991 @@ export class MsgCore implements INodeType {
         { name: 'Projects', value: 'projects' },
         { name: 'Webhooks', value: 'webhooks' }
       ],
-      default: 'apikeys',
+      default: 'analysis / entities',
     },
+      {
+        displayName: 'Operation',
+        name: 'operation',
+        type: 'options',
+        noDataExpression: true,
+        displayOptions: {
+          show: {
+            resource: ['analysis / entities'],
+          },
+        },
+        options: [
+          {
+          name: 'Entities',
+          value: 'entities',
+          action: 'List all extracted entities for a project with pagination and sorting',
+          description: 'List all extracted entities for a project with pagination and sorting',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/entities',
+              
+            },
+          },
+        },
+          {
+          name: 'Entities',
+          value: 'entities',
+          action: 'Get a specific extracted entity by ID',
+          description: 'Get a specific extracted entity by ID',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/entities/{{ $parameter["id"] }}',
+              
+            },
+          },
+        }
+        ],
+        default: 'entities',
+      },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / entities'],
+              operation: ['entities'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / entities'],
+              operation: ['entities'],
+            },
+          },
+        },
+      {
+          displayName: 'Id',
+          name: 'id',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'id parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / entities'],
+              operation: ['entities'],
+            },
+          },
+        },
+      {
+        displayName: 'Operation',
+        name: 'operation',
+        type: 'options',
+        noDataExpression: true,
+        displayOptions: {
+          show: {
+            resource: ['analysis / models'],
+          },
+        },
+        options: [
+          {
+          name: 'Models',
+          value: 'models',
+          action: 'List available LLM models from OpenRouter for analysis',
+          description: 'List available LLM models from OpenRouter for analysis',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/analysis/models',
+              
+            },
+          },
+        }
+        ],
+        default: 'models',
+      },
+      {
+        displayName: 'Operation',
+        name: 'operation',
+        type: 'options',
+        noDataExpression: true,
+        displayOptions: {
+          show: {
+            resource: ['analysis / profiles'],
+          },
+        },
+        options: [
+          {
+          name: 'Profiles',
+          value: 'profiles',
+          action: 'Create a new analysis profile (versioned pipeline)',
+          description: 'Create a new analysis profile (versioned pipeline)',
+          routing: {
+            request: {
+              method: 'POST',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/profiles',
+              body: {},
+            },
+          },
+        },
+          {
+          name: 'Profiles',
+          value: 'profiles',
+          action: 'List all analysis profiles for a project',
+          description: 'List all analysis profiles for a project',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/profiles',
+              
+            },
+          },
+        },
+          {
+          name: 'Profiles',
+          value: 'profiles',
+          action: 'Get a specific analysis profile',
+          description: 'Get a specific analysis profile',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/profiles/{{ $parameter["profileId"] }}',
+              
+            },
+          },
+        },
+          {
+          name: 'Profiles',
+          value: 'profiles',
+          action: 'Update an analysis profile',
+          description: 'Update an analysis profile',
+          routing: {
+            request: {
+              method: 'PATCH',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/profiles/{{ $parameter["profileId"] }}',
+              body: {},
+            },
+          },
+        },
+          {
+          name: 'Profiles',
+          value: 'profiles',
+          action: 'Delete an analysis profile (soft delete)',
+          description: 'Delete an analysis profile (soft delete)',
+          routing: {
+            request: {
+              method: 'DELETE',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/profiles/{{ $parameter["profileId"] }}',
+              
+            },
+          },
+        }
+        ],
+        default: 'profiles',
+      },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / profiles'],
+              operation: ['profiles'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / profiles'],
+              operation: ['profiles'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / profiles'],
+              operation: ['profiles'],
+            },
+          },
+        },
+      {
+          displayName: 'ProfileId',
+          name: 'profileId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'profileId parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / profiles'],
+              operation: ['profiles'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / profiles'],
+              operation: ['profiles'],
+            },
+          },
+        },
+      {
+          displayName: 'ProfileId',
+          name: 'profileId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'profileId parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / profiles'],
+              operation: ['profiles'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / profiles'],
+              operation: ['profiles'],
+            },
+          },
+        },
+      {
+          displayName: 'ProfileId',
+          name: 'profileId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'profileId parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / profiles'],
+              operation: ['profiles'],
+            },
+          },
+        },
+      {
+        displayName: 'Operation',
+        name: 'operation',
+        type: 'options',
+        noDataExpression: true,
+        displayOptions: {
+          show: {
+            resource: ['analysis / runs'],
+          },
+        },
+        options: [
+          {
+          name: 'Runs',
+          value: 'runs',
+          action: 'Execute an analysis run with a profile',
+          description: 'Execute an analysis run with a profile',
+          routing: {
+            request: {
+              method: 'POST',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/runs',
+              body: {},
+            },
+          },
+        },
+          {
+          name: 'Runs',
+          value: 'runs',
+          action: 'Get analysis run statistics for a project',
+          description: 'Get analysis run statistics for a project',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/runs/stats',
+              
+            },
+          },
+        },
+          {
+          name: 'Runs',
+          value: 'runs',
+          action: 'List analysis runs for a project with sorting',
+          description: 'List analysis runs for a project with sorting',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/runs',
+              
+            },
+          },
+        },
+          {
+          name: 'Runs',
+          value: 'runs',
+          action: 'Get analysis run status and results',
+          description: 'Get analysis run status and results',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/runs/{{ $parameter["runId"] }}',
+              
+            },
+          },
+        },
+          {
+          name: 'Runs',
+          value: 'runs',
+          action: 'Cancel a running or pending analysis run',
+          description: 'Cancel a running or pending analysis run',
+          routing: {
+            request: {
+              method: 'POST',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/runs/{{ $parameter["runId"] }}/cancel',
+              
+            },
+          },
+        }
+        ],
+        default: 'runs',
+      },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / runs'],
+              operation: ['runs'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / runs'],
+              operation: ['runs'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / runs'],
+              operation: ['runs'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / runs'],
+              operation: ['runs'],
+            },
+          },
+        },
+      {
+          displayName: 'RunId',
+          name: 'runId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'runId parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / runs'],
+              operation: ['runs'],
+            },
+          },
+        },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / runs'],
+              operation: ['runs'],
+            },
+          },
+        },
+      {
+          displayName: 'RunId',
+          name: 'runId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'runId parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / runs'],
+              operation: ['runs'],
+            },
+          },
+        },
+      {
+        displayName: 'Operation',
+        name: 'operation',
+        type: 'options',
+        noDataExpression: true,
+        displayOptions: {
+          show: {
+            resource: ['analysis / schemas'],
+          },
+        },
+        options: [
+          {
+          name: 'Schemas',
+          value: 'schemas',
+          action: 'Create a new entity schema for custom extraction',
+          description: 'Create a new entity schema for custom extraction',
+          routing: {
+            request: {
+              method: 'POST',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/schemas/entities',
+              body: {},
+            },
+          },
+        },
+          {
+          name: 'Schemas',
+          value: 'schemas',
+          action: 'List all entity schemas for a project',
+          description: 'List all entity schemas for a project',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/schemas/entities',
+              
+            },
+          },
+        },
+          {
+          name: 'Schemas',
+          value: 'schemas',
+          action: 'Get a specific entity schema',
+          description: 'Get a specific entity schema',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/schemas/entities/{{ $parameter["schemaId"] }}',
+              
+            },
+          },
+        },
+          {
+          name: 'Schemas',
+          value: 'schemas',
+          action: 'Update an entity schema',
+          description: 'Update an entity schema',
+          routing: {
+            request: {
+              method: 'PATCH',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/schemas/entities/{{ $parameter["schemaId"] }}',
+              body: {},
+            },
+          },
+        },
+          {
+          name: 'Schemas',
+          value: 'schemas',
+          action: 'Delete an entity schema (soft delete)',
+          description: 'Delete an entity schema (soft delete)',
+          routing: {
+            request: {
+              method: 'DELETE',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/analysis/schemas/entities/{{ $parameter["schemaId"] }}',
+              
+            },
+          },
+        }
+        ],
+        default: 'schemas',
+      },
+      {
+            displayName: 'Project ID',
+            name: 'project',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'project': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Schema name',
+            name: 'name',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'name': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Extraction type (llm_extraction, rule_based, api_logged)',
+            name: 'extractionType',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'extractionType': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'JSON schema for entity properties',
+            name: 'properties',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'properties': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'LLM prompt (for llm_extraction)',
+            name: 'prompt',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'prompt': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Schema description',
+            name: 'description',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'description': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / schemas'],
+              operation: ['schemas'],
+            },
+          },
+        },
+      {
+            displayName: 'Project ID',
+            name: 'project',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'project': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / schemas'],
+              operation: ['schemas'],
+            },
+          },
+        },
+      {
+            displayName: 'Project ID',
+            name: 'project',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'project': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Schema ID',
+            name: 'schemaId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'schemaId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / schemas'],
+              operation: ['schemas'],
+            },
+          },
+        },
+      {
+          displayName: 'SchemaId',
+          name: 'schemaId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'schemaId parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / schemas'],
+              operation: ['schemas'],
+            },
+          },
+        },
+      {
+            displayName: 'Project ID',
+            name: 'project',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'project': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Schema ID',
+            name: 'schemaId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'schemaId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'New schema name',
+            name: 'name',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'name': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'New LLM prompt',
+            name: 'prompt',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'prompt': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / schemas'],
+              operation: ['schemas'],
+            },
+          },
+        },
+      {
+          displayName: 'SchemaId',
+          name: 'schemaId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'schemaId parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / schemas'],
+              operation: ['schemas'],
+            },
+          },
+        },
+      {
+            displayName: 'Project ID',
+            name: 'project',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'project': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Schema ID',
+            name: 'schemaId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / schemas'],
+                operation: ['schemas'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'schemaId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['analysis / schemas'],
+              operation: ['schemas'],
+            },
+          },
+        },
+      {
+          displayName: 'SchemaId',
+          name: 'schemaId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'schemaId parameter',
+          displayOptions: {
+            show: {
+              resource: ['analysis / schemas'],
+              operation: ['schemas'],
+            },
+          },
+        },
       {
         displayName: 'Operation',
         name: 'operation',
@@ -632,6 +1621,679 @@ export class MsgCore implements INodeType {
         noDataExpression: true,
         displayOptions: {
           show: {
+            resource: ['chats'],
+          },
+        },
+        options: [
+          {
+          name: 'List',
+          value: 'list',
+          action: 'List all chats for a project with filtering and pagination',
+          description: 'List all chats for a project with filtering and pagination',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/chats',
+              body: {},
+            },
+          },
+        },
+          {
+          name: 'Get',
+          value: 'get',
+          action: 'Get details of a specific chat',
+          description: 'Get details of a specific chat',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/chats/{{ $parameter["chatId"] }}',
+              
+            },
+          },
+        },
+          {
+          name: 'Messages',
+          value: 'messages',
+          action: 'Get messages for a specific chat with pagination',
+          description: 'Get messages for a specific chat with pagination',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/chats/{{ $parameter["chatId"] }}/messages',
+              
+            },
+          },
+        },
+          {
+          name: 'Update',
+          value: 'update',
+          action: 'Update chat metadata (name, avatar, custom metadata)',
+          description: 'Update chat metadata (name, avatar, custom metadata)',
+          routing: {
+            request: {
+              method: 'PATCH',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/chats/{{ $parameter["chatId"] }}',
+              body: {},
+            },
+          },
+        },
+          {
+          name: 'Sync-all',
+          value: 'sync-all',
+          action: 'Sync all chats and their messages from all platforms',
+          description: 'Sync all chats and their messages from all platforms',
+          routing: {
+            request: {
+              method: 'POST',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/chats/sync-all',
+              body: {},
+            },
+          },
+        },
+          {
+          name: 'Sync',
+          value: 'sync',
+          action: 'Sync historical messages for a specific chat from the platform provider',
+          description: 'Sync historical messages for a specific chat from the platform provider',
+          routing: {
+            request: {
+              method: 'POST',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/chats/{{ $parameter["chatId"] }}/sync',
+              body: {},
+            },
+          },
+        }
+        ],
+        default: 'list',
+      },
+      {
+            displayName: 'Filter by platform ID',
+            name: 'platformId',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['list'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'platformId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Filter by chat type (individual, group, channel)',
+            name: 'chatType',
+            type: 'string',
+            required: false,
+            default: "",
+            options: [{name: 'individual', value: 'individual'}, {name: 'group', value: 'group'}, {name: 'channel', value: 'channel'}],
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['list'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'chatType': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Search chats by name or provider chat ID',
+            name: 'search',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['list'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'search': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Number of chats to return',
+            name: 'limit',
+            type: 'number',
+            required: false,
+            default: 50,
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['list'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'limit': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Number of chats to skip',
+            name: 'offset',
+            type: 'number',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['list'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'offset': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['list'],
+            },
+          },
+        },
+      {
+            displayName: 'Chat ID',
+            name: 'chatId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['get'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'chatId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['get'],
+            },
+          },
+        },
+      {
+          displayName: 'ChatId',
+          name: 'chatId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'chatId parameter',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['get'],
+            },
+          },
+        },
+      {
+            displayName: 'Chat ID',
+            name: 'chatId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['messages'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'chatId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Number of messages to return',
+            name: 'limit',
+            type: 'number',
+            required: false,
+            default: 50,
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['messages'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'limit': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Number of messages to skip',
+            name: 'offset',
+            type: 'number',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['messages'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'offset': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['messages'],
+            },
+          },
+        },
+      {
+          displayName: 'ChatId',
+          name: 'chatId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'chatId parameter',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['messages'],
+            },
+          },
+        },
+      {
+            displayName: 'Chat ID',
+            name: 'chatId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['update'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'chatId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Chat display name',
+            name: 'name',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['update'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'name': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Chat avatar URL',
+            name: 'avatarUrl',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['update'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'avatarUrl': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Custom metadata (JSON string)',
+            name: 'metadata',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['update'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'metadata': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['update'],
+            },
+          },
+        },
+      {
+          displayName: 'ChatId',
+          name: 'chatId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'chatId parameter',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['update'],
+            },
+          },
+        },
+      {
+            displayName: 'Optional: Sync only chats from specific platform',
+            name: 'platformId',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['sync-all'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'platformId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Start date for history sync (ISO 8601)',
+            name: 'startDate',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['sync-all'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'startDate': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'End date for history sync (ISO 8601)',
+            name: 'endDate',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['sync-all'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'endDate': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Maximum number of messages to sync per chat (1-1000)',
+            name: 'limit',
+            type: 'number',
+            required: false,
+            default: 100,
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['sync-all'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'limit': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['sync-all'],
+            },
+          },
+        },
+      {
+            displayName: 'Chat ID',
+            name: 'chatId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['sync'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'chatId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Start date for history sync (ISO 8601)',
+            name: 'startDate',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['sync'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'startDate': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'End date for history sync (ISO 8601)',
+            name: 'endDate',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['sync'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'endDate': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Maximum number of messages to sync (1-1000)',
+            name: 'limit',
+            type: 'number',
+            required: false,
+            default: 100,
+            
+            displayOptions: {
+              show: {
+                resource: ['chats'],
+                operation: ['sync'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'limit': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['sync'],
+            },
+          },
+        },
+      {
+          displayName: 'ChatId',
+          name: 'chatId',
+          type: 'string',
+          required: true,
+          default: '',
+          description: 'chatId parameter',
+          displayOptions: {
+            show: {
+              resource: ['chats'],
+              operation: ['sync'],
+            },
+          },
+        },
+      {
+        displayName: 'Operation',
+        name: 'operation',
+        type: 'options',
+        noDataExpression: true,
+        displayOptions: {
+          show: {
             resource: ['identities'],
           },
         },
@@ -663,10 +2325,36 @@ export class MsgCore implements INodeType {
           },
         },
           {
+          name: 'Search',
+          value: 'search',
+          action: 'Search identities by display name or email',
+          description: 'Search identities by display name or email',
+          routing: {
+            request: {
+              method: 'GET',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/identities/search',
+              
+            },
+          },
+        },
+          {
+          name: 'Quick-link',
+          value: 'quick-link',
+          action: 'Create identity and link platform user in one operation',
+          description: 'Create identity and link platform user in one operation',
+          routing: {
+            request: {
+              method: 'POST',
+              url: '=/api/v1/projects/{{ $parameter["project"] }}/identities/quick-link',
+              body: {},
+            },
+          },
+        },
+          {
           name: 'Lookup',
           value: 'lookup',
-          action: 'Lookup identity by platform user ID',
-          description: 'Lookup identity by platform user ID',
+          action: 'Lookup identity by platform user ID (returns null if not found)',
+          description: 'Lookup identity by platform user ID (returns null if not found)',
           routing: {
             request: {
               method: 'GET',
@@ -878,6 +2566,160 @@ export class MsgCore implements INodeType {
             show: {
               resource: ['identities'],
               operation: ['list'],
+            },
+          },
+        },
+      {
+            displayName: 'Search query (min 2 characters)',
+            name: 'q',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['identities'],
+                operation: ['search'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'q': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['identities'],
+              operation: ['search'],
+            },
+          },
+        },
+      {
+            displayName: 'Platform configuration ID',
+            name: 'platformId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['identities'],
+                operation: ['quick-link'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'platformId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Provider-specific user ID',
+            name: 'providerUserId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['identities'],
+                operation: ['quick-link'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'providerUserId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Display name on the platform',
+            name: 'providerUserDisplay',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['identities'],
+                operation: ['quick-link'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'providerUserDisplay': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Display name for the new identity',
+            name: 'displayName',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['identities'],
+                operation: ['quick-link'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'displayName': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Email address for the new identity',
+            name: 'email',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['identities'],
+                operation: ['quick-link'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'email': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+          displayName: 'Project',
+          name: 'project',
+          type: 'string',
+          required: true,
+          default: 'default',
+          description: 'Project identifier to operate on',
+          displayOptions: {
+            show: {
+              resource: ['identities'],
+              operation: ['quick-link'],
             },
           },
         },
@@ -1758,8 +3600,8 @@ export class MsgCore implements INodeType {
           {
           name: 'List',
           value: 'list',
-          action: 'List received messages for a project',
-          description: 'List received messages for a project',
+          action: 'List messages for a project (sent and received)',
+          description: 'List messages for a project (sent and received)',
           routing: {
             request: {
               method: 'GET',
@@ -1777,19 +3619,6 @@ export class MsgCore implements INodeType {
             request: {
               method: 'GET',
               url: '=/api/v1/projects/{{ $parameter["project"] }}/messages/stats',
-              
-            },
-          },
-        },
-          {
-          name: 'Sent',
-          value: 'sent',
-          action: 'List sent messages for a project',
-          description: 'List sent messages for a project',
-          routing: {
-            request: {
-              method: 'GET',
-              url: '=/api/v1/projects/{{ $parameter["project"] }}/messages/sent',
               
             },
           },
@@ -1910,27 +3739,6 @@ export class MsgCore implements INodeType {
             },
           },
       {
-            displayName: 'Filter by platform type (telegram, discord, whatsapp-evo)',
-            name: 'platform',
-            type: 'string',
-            required: false,
-            default: "",
-            options: [{name: 'telegram', value: 'telegram'}, {name: 'discord', value: 'discord'}, {name: 'whatsapp-evo', value: 'whatsapp-evo'}],
-            displayOptions: {
-              show: {
-                resource: ['messages'],
-                operation: ['list'],
-              },
-            },
-            routing: {
-              request: {
-                qs: {
-                  'platform': '={{$value}}',
-                },
-              },
-            },
-          },
-      {
             displayName: 'Filter by chat/channel ID',
             name: 'chatId',
             type: 'string',
@@ -1968,6 +3776,27 @@ export class MsgCore implements INodeType {
               request: {
                 qs: {
                   'userId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Filter by message direction',
+            name: 'direction',
+            type: 'string',
+            required: false,
+            default: "",
+            options: [{name: 'sent', value: 'sent'}, {name: 'received', value: 'received'}],
+            displayOptions: {
+              show: {
+                resource: ['messages'],
+                operation: ['list'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'direction': '={{$value}}',
                 },
               },
             },
@@ -2144,104 +3973,6 @@ export class MsgCore implements INodeType {
             show: {
               resource: ['messages'],
               operation: ['stats'],
-            },
-          },
-        },
-      {
-            displayName: 'Filter by platform',
-            name: 'platform',
-            type: 'string',
-            required: false,
-            default: "",
-            
-            displayOptions: {
-              show: {
-                resource: ['messages'],
-                operation: ['sent'],
-              },
-            },
-            routing: {
-              request: {
-                qs: {
-                  'platform': '={{$value}}',
-                },
-              },
-            },
-          },
-      {
-            displayName: 'Filter by status (pending, sent, failed)',
-            name: 'status',
-            type: 'string',
-            required: false,
-            default: "",
-            options: [{name: 'pending', value: 'pending'}, {name: 'sent', value: 'sent'}, {name: 'failed', value: 'failed'}],
-            displayOptions: {
-              show: {
-                resource: ['messages'],
-                operation: ['sent'],
-              },
-            },
-            routing: {
-              request: {
-                qs: {
-                  'status': '={{$value}}',
-                },
-              },
-            },
-          },
-      {
-            displayName: 'Number of messages to return',
-            name: 'limit',
-            type: 'number',
-            required: false,
-            default: 50,
-            
-            displayOptions: {
-              show: {
-                resource: ['messages'],
-                operation: ['sent'],
-              },
-            },
-            routing: {
-              request: {
-                qs: {
-                  'limit': '={{$value}}',
-                },
-              },
-            },
-          },
-      {
-            displayName: 'Number of messages to skip',
-            name: 'offset',
-            type: 'number',
-            required: false,
-            default: "",
-            
-            displayOptions: {
-              show: {
-                resource: ['messages'],
-                operation: ['sent'],
-              },
-            },
-            routing: {
-              request: {
-                qs: {
-                  'offset': '={{$value}}',
-                },
-              },
-            },
-          },
-      {
-          displayName: 'Project',
-          name: 'project',
-          type: 'string',
-          required: true,
-          default: 'default',
-          description: 'Project identifier to operate on',
-          displayOptions: {
-            show: {
-              resource: ['messages'],
-              operation: ['sent'],
             },
           },
         },
