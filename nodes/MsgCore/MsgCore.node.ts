@@ -242,6 +242,132 @@ export class MsgCore implements INodeType {
         default: 'profiles',
       },
       {
+            displayName: 'Profile name',
+            name: 'name',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / profiles'],
+                operation: ['profiles'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'name': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Profile description',
+            name: 'description',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / profiles'],
+                operation: ['profiles'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'description': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Analysis graph definition (JSON)',
+            name: 'graphDefinition',
+            type: 'json',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / profiles'],
+                operation: ['profiles'],
+              },
+            },
+            routing: {
+              request: {
+                body: {
+                  'graphDefinition': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Entity schema IDs (JSON array)',
+            name: 'entitySchemaIds',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / profiles'],
+                operation: ['profiles'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'entitySchemaIds': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Store extracted entities',
+            name: 'storeEntities',
+            type: 'boolean',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / profiles'],
+                operation: ['profiles'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'storeEntities': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Generate tags from analysis',
+            name: 'generateTags',
+            type: 'boolean',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / profiles'],
+                operation: ['profiles'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'generateTags': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
           displayName: 'Project',
           name: 'project',
           type: 'string',
@@ -432,6 +558,111 @@ export class MsgCore implements INodeType {
         ],
         default: 'runs',
       },
+      {
+            displayName: 'Analysis profile ID',
+            name: 'profileId',
+            type: 'string',
+            required: true,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / runs'],
+                operation: ['runs'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'profileId': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Filter by chat IDs (JSON array)',
+            name: 'chatIds',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / runs'],
+                operation: ['runs'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'chatIds': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Filter by identity IDs (JSON array)',
+            name: 'identityIds',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / runs'],
+                operation: ['runs'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'identityIds': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'Start date for analysis (ISO 8601)',
+            name: 'dateRangeStart',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / runs'],
+                operation: ['runs'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'dateRangeStart': '={{$value}}',
+                },
+              },
+            },
+          },
+      {
+            displayName: 'End date for analysis (ISO 8601)',
+            name: 'dateRangeEnd',
+            type: 'string',
+            required: false,
+            default: "",
+            
+            displayOptions: {
+              show: {
+                resource: ['analysis / runs'],
+                operation: ['runs'],
+              },
+            },
+            routing: {
+              request: {
+                qs: {
+                  'dateRangeEnd': '={{$value}}',
+                },
+              },
+            },
+          },
       {
           displayName: 'Project',
           name: 'project',
