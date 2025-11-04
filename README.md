@@ -65,9 +65,8 @@ npm install n8n-nodes-msgcore
 
 ### Messages
 
-- **messages list** - List received messages for a project
+- **messages list** - List messages for a project (sent and received)
 - **messages stats** - Get message statistics for a project
-- **messages sent** - List sent messages for a project
 - **messages get** - Get a specific message by ID
 - **messages cleanup** - Delete messages older than specified days
 - **messages send** - Send a message to platforms
@@ -88,7 +87,9 @@ npm install n8n-nodes-msgcore
 
 - **identities create** - Create a new identity with platform aliases
 - **identities list** - List all identities for a project
-- **identities lookup** - Lookup identity by platform user ID
+- **identities search** - Search identities by display name or email
+- **identities quick-link** - Create identity and link platform user in one operation
+- **identities lookup** - Lookup identity by platform user ID (returns null if not found)
 - **identities get** - Get a specific identity by ID
 - **identities update** - Update identity metadata (display name, email, metadata)
 - **identities add-alias** - Add a platform alias to an existing identity
@@ -118,6 +119,48 @@ npm install n8n-nodes-msgcore
 - **platforms logs list** - List platform processing logs for a project
 - **platforms logs get** - List logs for a specific platform configuration
 - **platforms logs stats** - Get platform logs statistics and recent errors
+
+### Chats
+
+- **chats list** - List all chats for a project with filtering and pagination
+- **chats get** - Get details of a specific chat
+- **chats messages** - Get messages for a specific chat with pagination
+- **chats update** - Update chat metadata (name, avatar, custom metadata)
+- **chats sync-all** - Sync all chats and their messages from all platforms
+- **chats sync** - Sync historical messages for a specific chat from the platform provider
+
+### Analysis / Models
+
+- **analysis models list** - List available LLM models from OpenRouter for analysis
+
+### Analysis / Entities
+
+- **analysis entities list** - List all extracted entities for a project with pagination and sorting
+- **analysis entities get** - Get a specific extracted entity by ID
+
+### Analysis / Schemas
+
+- **analysis schemas create** - Create a new entity schema for custom extraction
+- **analysis schemas list** - List all entity schemas for a project
+- **analysis schemas get** - Get a specific entity schema
+- **analysis schemas update** - Update an entity schema
+- **analysis schemas delete** - Delete an entity schema (soft delete)
+
+### Analysis / Runs
+
+- **analysis runs create** - Execute an analysis run with a profile
+- **analysis runs stats** - Get analysis run statistics for a project
+- **analysis runs list** - List analysis runs for a project with sorting
+- **analysis runs get** - Get analysis run status and results
+- **analysis runs cancel** - Cancel a running or pending analysis run
+
+### Analysis / Profiles
+
+- **analysis profiles create** - Create a new analysis profile (versioned pipeline)
+- **analysis profiles list** - List all analysis profiles for a project
+- **analysis profiles get** - Get a specific analysis profile
+- **analysis profiles update** - Update an analysis profile
+- **analysis profiles delete** - Delete an analysis profile (soft delete)
 
 ## Configuration
 
